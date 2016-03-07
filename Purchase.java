@@ -33,9 +33,9 @@ public class Purchase {
         this.book = book;
         this.client = client;
         if(client.getDiscountCard()) {
-            money = book.getPrice() * (100 - client.getDiscount()) / 100;
+            money = book.getPrice() * (100 - client.getDiscount()) / 100*book.getQuontity();
         }
         else{
-            money = book.getPrice();}
+            money = book.getPrice()*book.getQuontity();}
         }
 }

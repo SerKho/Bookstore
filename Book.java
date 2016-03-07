@@ -7,6 +7,7 @@ public class Book {
     private String name;
     private String author;
     private Genre genre;
+    private int quontity;
     private double price;
 
     public String getName() {
@@ -25,14 +26,23 @@ public class Book {
         return price;
     }
 
+    public int getQuontity() {
+        return quontity;
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public Book(String name, String author, Genre genre, double price){
+    public void setQuontity(int quontity) {
+        this.quontity = quontity;
+    }
+
+    public Book(String name, String author, Genre genre, double price, int quontity){
         this.name = name;
         this.author = author;
         this.genre = genre;
         this.price = price;
+        this.quontity = quontity;
     }
 }
