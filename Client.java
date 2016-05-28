@@ -1,5 +1,8 @@
 package Bookstore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.SplittableRandom;
 
 /**
@@ -10,8 +13,6 @@ public class Client {
     private String surname;
     private Boolean sex; //0 - Male, 1 - FeeMale
     private String email;
-    private Purchase[] purcases = new Purchase[10];
-    private int numberOfPurchases;
     private Boolean discountCard;
     private String numberDiscountCard;
     private int discount;
@@ -30,14 +31,6 @@ public class Client {
 
     public String getEmail() {
         return email;
-    }
-
-    public Purchase[] getPurchases() {
-        return purcases;
-    }
-
-    public int getNumberOfPurchases() {
-        return numberOfPurchases;
     }
 
     public Boolean getDiscountCard() {
@@ -68,21 +61,33 @@ public class Client {
         this.email = email;
     }
 
-    public void updatePurchases(Purchase purchase){
-        if (purchase != null) {
-            if(numberOfPurchases>=(purcases.length-1)){
-                Purchase[] temp = new Purchase[(int)(purcases.length*1.2)];
-                System.arraycopy(purcases, 0, temp, 0, purcases.length);
-                purcases = temp;
-            }
-            purcases[numberOfPurchases] = purchase;
-            numberOfPurchases++;
-        }
-    }
 
     public Client(String name, String surname, Boolean sex){
         this.name = name;
         this.surname = surname;
         this.sex = sex;
+        email = null;
+        discountCard = true;
+        numberDiscountCard = "Default DiscountCard";
+        discount = 0;
+    }
+
+    public Client(String name, String surname, Boolean sex, String email){
+        this(name, surname, sex);
+        this.setEmail(email);
+        Date d = new Date(System.currentTimeMillis());
+        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyHHmm");
+        this.setNumberDiscountCard(name.substring(0,1)+surname.substring(0,1)+sex.toString().substring(0,1) +
+        s.format(d));
+        this.setDiscount(10);
+    }
+
+    @Override
+    public String toString() {
+        return this.getName() + " " + this.getSurname() + ", " + this.getNumberDiscountCard();
+    }
+
+    public static Client DefaultClient(){
+        return new Client("Defauft", "Client", true);
     }
 }

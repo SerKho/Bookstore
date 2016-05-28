@@ -28,6 +28,10 @@ public class Purchase {
         return money;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public Purchase(Book book, Client client){
         date = new Date(System.currentTimeMillis());
         this.book = book;
@@ -38,4 +42,12 @@ public class Purchase {
         else{
             money = book.getPrice()*book.getQuontity();}
         }
+    public String[] separate(){
+        String[]res = new String[4];
+        res[0] = date.toString();
+        res[1] = book.toString();
+        res[2] = client.toString();
+        res[3] = book.getQuontity()+"";
+        return res;
+    }
 }
